@@ -2,10 +2,10 @@ import { Input } from '@nextui-org/input'
 import { Form } from '@nextui-org/form'
 import { Chip } from '@nextui-org/chip'
 import { Button } from '@nextui-org/button'
-
 import History from "./components/History"
 import Mokup from './components/Mokup'
 
+import CurrentWeather from './components/ui/CurrentWeather'
 import getWeather from './helpers/getWeather'
 
 function App() {
@@ -13,9 +13,7 @@ function App() {
     event.preventDefault();
     const location = new FormData(event.target).get("location")
     if(!location) return
-    const data = await getWeather(location);
-    console.log(data)
-    
+    const currentWeather = await getWeather(location);    
   }
 
 
@@ -42,7 +40,7 @@ function App() {
         </div>
       </div>
       <div className='weather_container'>
-        <div className='weather_current'><Mokup /></div>
+        <CurrentWeather></CurrentWeather>
         <div className='weather_hourly'><Mokup /></div>
         <div className='weather_forecast'><Mokup /></div>
       </div>
