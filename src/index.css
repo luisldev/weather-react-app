@@ -4,6 +4,7 @@
 
 .weather_current {
     grid-area: weather_current;
+    background: linear-gradient(90deg, #005C97, #363795);
 }
 
 .weather_hourly {
