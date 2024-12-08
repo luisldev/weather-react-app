@@ -6,7 +6,18 @@ import { Button } from '@nextui-org/button'
 import History from "./components/History"
 import Mokup from './components/Mokup'
 
+import getWeather from './helpers/getWeather'
+
 function App() {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const location = new FormData(event.target).get("location")
+    if(!location) return
+    const data = await getWeather(location);
+    console.log(data)
+    
+  }
+
 
   return (
     <>
@@ -14,20 +25,22 @@ function App() {
         <div>
           <Chip color='primary'><strong>Ciudad,</strong> Pais</Chip>
         </div>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Input
+          name="location"
+          id="location"
           className='w-64'
           placeholder='New York, Tokio, Londres...'
           radius='lg'
           type='search'
           variant='bordered'
+          required
         />
         </Form>
         <div>
           <History />
         </div>
       </div>
-
       <div className='weather_container'>
         <div className='weather_current'><Mokup /></div>
         <div className='weather_hourly'><Mokup /></div>
