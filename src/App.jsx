@@ -1,27 +1,35 @@
 import { Input } from '@nextui-org/input'
 import { Form } from '@nextui-org/form'
 import { Chip } from '@nextui-org/chip'
-import { Button } from '@nextui-org/button'
 import History from "./components/History"
 import Mokup from './components/Mokup'
+import { useWeather } from "./customHooks/useWeather"
 
+import { useState } from 'react'
 import CurrentWeather from './components/ui/CurrentWeather'
-import getWeather from './helpers/getWeather'
 
 function App() {
-  async function handleSubmit(event) {
+  const [ city, setCity ] = useState(null)
+  const { data, loading } = useWeather(
+    city
+    ? `https://api.weatherapi.com/v1/forecast.json?key=993ba42994fe47b4a1e191246232010&q=${city}&days=4&aqi=no&alerts=no&lang=es`
+    : null
+  ) 
+
+  function handleSubmit(event) {
     event.preventDefault();
-    const location = new FormData(event.target).get("location")
-    if(!location) return
-    const currentWeather = await getWeather(location);    
+    const country = new FormData(event.target).get("location")
+    if(!country) return
+    setCity(country)
   }
-
-
+  
   return (
     <>
       <div className='flex flex-row items-center justify-between'>
         <div>
-          <Chip color='primary'><strong>Ciudad,</strong> Pais</Chip>
+          {
+            data && <Chip color='primary'><strong>{data.location.name},</strong> {data.location.country}</Chip>
+          }
         </div>
         <Form onSubmit={handleSubmit}>
           <Input
@@ -40,7 +48,10 @@ function App() {
         </div>
       </div>
       <div className='weather_container'>
-        <CurrentWeather></CurrentWeather>
+        {loading && <div>Loading...</div>}
+        {
+          data && <CurrentWeather weather={data.current} time={data.location.localtime_epoch} />
+        }
         <div className='weather_hourly'><Mokup /></div>
         <div className='weather_forecast'><Mokup /></div>
       </div>
