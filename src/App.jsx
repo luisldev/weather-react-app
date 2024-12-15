@@ -13,6 +13,7 @@ import GithubButton from './components/GithubButton';
 
 function App() {
   const [city, setCity] = useState(null);
+  const [searching, setSearching] = useState(false);
   const { data, loading } = useWeather(
     city
       ? `https://api.weatherapi.com/v1/forecast.json?key=993ba42994fe47b4a1e191246232010&q=${city}&days=4&aqi=no&alerts=no&lang=es`
@@ -23,7 +24,12 @@ function App() {
     event.preventDefault();
     const country = new FormData(event.target).get('location');
     if (!country) return;
+    setSearching(true);
     setCity(country);
+  }
+
+  if (!loading && searching) {
+    setSearching(false);
   }
 
   return (
@@ -31,7 +37,7 @@ function App() {
       <div className='flex flex-row items-center justify-between'>
         <div className='flex flex-row items-center justify-center gap-x-4'>
           <GithubButton />
-          {data && (
+          {data && !searching && (
             <Chip color='primary'>
               <strong>{data.location.name},</strong> {data.location.country}
             </Chip>
@@ -53,21 +59,22 @@ function App() {
           <History />
         </div>
       </div>
-      {loading && <Loader />}
-      <div className='weather_container'>
-        {data && (
-          <>
-            <CurrentWeather
-              weather={data.current}
-              time={data.location.localtime_epoch}
-            />
-            <HourlyWeather></HourlyWeather>
-            <ForecastWeather
-              forecast={data.forecast.forecastday}
-            ></ForecastWeather>
-          </>
-        )}
-      </div>
+      {loading || searching ? (
+        <Loader />
+      ) : data ? (
+        <div className='weather_container'>
+          <CurrentWeather
+            weather={data.current}
+            time={data.location.localtime_epoch}
+          />
+          <HourlyWeather></HourlyWeather>
+          <ForecastWeather
+            forecast={data.forecast.forecastday}
+          ></ForecastWeather>
+        </div>
+      ) : (
+        ''
+      )}
     </>
   );
 }
