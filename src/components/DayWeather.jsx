@@ -13,18 +13,18 @@ function DayWeather({ data, day = 'Hoy' }) {
   };
 
   return (
-    <article className='h-full flex flex-col justify-between bg-neutral-900 py-2 px-4 rounded-xl'>
-      <header className='flex flex-row items-center justify-between'>
+    <article className='day_weather h-full min-w-56 bg-neutral-900 p-4 rounded-xl text-center'>
+      <header className='day_weather_header flex flex-row items-center justify-between'>
         <Chip>{day}</Chip>
         <Chip>{weather.condition}</Chip>
       </header>
-      <main className='text-center my-4'>
+      <main className='day_weather_main my-4'>
         <p className='text-5xl'>{weather.temp}°</p>
         <p className='mt-4'>
           min: {weather.min_temp}° / max: {weather.max_temp}°
         </p>
       </main>
-      <footer className='text-sm'>
+      <footer className='day_weather_footer text-sm'>
         <p>
           Salida de sol: <strong>{weather.sunrise}</strong>
         </p>

@@ -35,3 +35,40 @@ body {
     'weather_hourly weather_hourly';
   gap: 1rem;
 }
+
+.day_weather {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'day_weather_header day_weather_header'
+    'day_weather_main day_weather_main'
+    'day_weather_footer day_weather_footer';
+}
+
+.day_weather_header {
+  grid-area: day_weather_header;
+}
+.day_weather_main {
+  grid-area: day_weather_main;
+}
+.day_weather_footer {
+  grid-area: day_weather_footer;
+}
+
+@media (width <= 800px) {
+  .weather_container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'weather_current'
+      'weather_forecast'
+      'weather_hourly';
+  }
+
+  .day_weather {
+    grid-template-areas:
+      'day_weather_header day_weather_header'
+      'day_weather_main day_weather_footer'
+      'day_weather_main day_weather_footer';
+  }
+}

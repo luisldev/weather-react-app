@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <div className='flex flex-row items-center justify-between'>
+      <header className='flex flex-row items-center justify-between'>
         <div className='flex flex-row items-center justify-center gap-x-4'>
           <GithubButton />
           {data && !searching && (
@@ -58,7 +58,7 @@ function App() {
         <div>
           <History />
         </div>
-      </div>
+      </header>
       {loading || searching ? (
         <Loader />
       ) : data ? (

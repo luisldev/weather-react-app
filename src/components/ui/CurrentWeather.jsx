@@ -15,7 +15,7 @@ function CurrentWeather({ weather, time }) {
   const last_update = weather.last_updated;
 
   return (
-    <div className='weather_current rounded-lg p-2 flex flex-col justify-between'>
+    <article className='weather_current min-w-72 rounded-lg p-2 flex flex-col justify-between'>
       <div className='flex flex-row items-center justify-between'>
         <Chip>{date}</Chip>
         <Chip>{condition}</Chip>
@@ -54,7 +54,7 @@ function CurrentWeather({ weather, time }) {
           Última actualización: {last_update}
         </h6>
       </footer>
-    </div>
+    </article>
   );
 }
 
