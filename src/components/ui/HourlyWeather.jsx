@@ -1,10 +1,9 @@
-function HourlyWeather({hourly}) {
-
-    return (
-    <div className='weather_hourly'>
-        HourlyWeather
-    </div>
-    )
+function HourlyWeather({ hourly }) {
+  return (
+    <footer className='weather_hourly bg-neutral-900 rounded-lg p-2'>
+      HourlyWeather
+    </footer>
+  );
 }
 
-export default HourlyWeather
+export default HourlyWeather;

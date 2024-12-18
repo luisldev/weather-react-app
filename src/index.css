@@ -44,6 +44,7 @@ body {
     'day_weather_header day_weather_header'
     'day_weather_main day_weather_main'
     'day_weather_footer day_weather_footer';
+  gap: 1rem;
 }
 
 .day_weather_header {
@@ -56,7 +57,7 @@ body {
   grid-area: day_weather_footer;
 }
 
-@media (width <= 800px) {
+@media (width < 800px) {
   .weather_container {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -66,9 +67,14 @@ body {
   }
 
   .day_weather {
+    width: 100%;
     grid-template-areas:
       'day_weather_header day_weather_header'
       'day_weather_main day_weather_footer'
       'day_weather_main day_weather_footer';
+  }
+
+  .weather_forecast {
+    flex-direction: column;
   }
 }

@@ -35,14 +35,12 @@ function App() {
   return (
     <>
       <header className='flex flex-row items-center justify-between'>
-        <div className='flex flex-row items-center justify-center gap-x-4'>
-          <GithubButton />
-          {data && !searching && (
-            <Chip color='primary'>
-              <strong>{data.location.name},</strong> {data.location.country}
-            </Chip>
-          )}
-        </div>
+        <GithubButton className='hidden lg:flex' />
+        {data && !searching && (
+          <Chip className='hidden lg:flex ' color='primary'>
+            <strong>{data.location.name},</strong> {data.location.country}
+          </Chip>
+        )}
         <Form className='flex flex-row flex-grow-0' onSubmit={handleSubmit}>
           <Input
             color='primary'
@@ -55,9 +53,13 @@ function App() {
             required
           />
         </Form>
-        <div>
-          <History />
-        </div>
+        <History className='hidden lg:flex' />
+        {/** Pendiente agregar menu lateral
+         * import Menu from './components/Menu';
+         *
+         *
+         * <Menu />
+         */}
       </header>
       {loading || searching ? (
         <Loader />
@@ -67,7 +69,7 @@ function App() {
             weather={data.current}
             time={data.location.localtime_epoch}
           />
-          <HourlyWeather></HourlyWeather>
+          <HourlyWeather />
           <ForecastWeather
             forecast={data.forecast.forecastday}
           ></ForecastWeather>
