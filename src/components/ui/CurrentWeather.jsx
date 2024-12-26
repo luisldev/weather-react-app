@@ -2,7 +2,7 @@ import { Chip } from '@nextui-org/chip';
 import converTime from '../../helpers/converTime';
 
 function CurrentWeather({ weather, time }) {
-  const date = converTime({ time });
+  const date = converTime(time);
   const condition = weather.condition.text;
   const current_temp_c = weather.temp_c;
   const feels_like =
@@ -16,9 +16,11 @@ function CurrentWeather({ weather, time }) {
 
   return (
     <article className='weather_current min-w-72 rounded-lg p-2 flex flex-col justify-between'>
-      <div className='flex flex-row items-center justify-between'>
+      <div className='flex flex-row flex-wrap gap-2 items-center justify-between'>
         <Chip>{date}</Chip>
-        <Chip>{condition}</Chip>
+        <p className='max-w-fit min-w-min inline-flex items-center justify-between whitespace-nowrap px-4 py-1 text-wrap text-small rounded-full bg-default text-default-foreground'>
+          {condition}
+        </p>
       </div>
 
       <div className='text-center my-8'>

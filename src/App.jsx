@@ -6,7 +6,7 @@ import { useWeather } from './customHooks/useWeather';
 import { useState } from 'react';
 import CurrentWeather from './components/ui/CurrentWeather';
 import HourlyWeather from './components/ui/HourlyWeather';
-import ForecastWeather from './components/ui/ForecastWeather';
+import DailyWeather from './components/ui/DailyWeather';
 import Loader from './components/Loader';
 import History from './components/History';
 import GithubButton from './components/GithubButton';
@@ -14,9 +14,9 @@ import GithubButton from './components/GithubButton';
 function App() {
   const [city, setCity] = useState(null);
   const [searching, setSearching] = useState(false);
-  const { data, loading } = useWeather(
+  const { currentWeather, hourlyWeather, dailyWeather, loading } = useWeather(
     city
-      ? `https://api.weatherapi.com/v1/forecast.json?key=993ba42994fe47b4a1e191246232010&q=${city}&days=4&aqi=no&alerts=no&lang=es`
+      ? `https://api.weatherapi.com/v1/forecast.json?key=993ba42994fe47b4a1e191246232010&q=${city}&days=3&aqi=no&alerts=no&lang=es`
       : null
   );
 
@@ -36,9 +36,9 @@ function App() {
     <>
       <header className='flex flex-row items-center justify-between'>
         <GithubButton className='hidden lg:flex' />
-        {data && !searching && (
+        {currentWeather && !searching && (
           <Chip className='hidden lg:flex ' color='primary'>
-            <strong>{data.location.name},</strong> {data.location.country}
+            <strong>{currentWeather.location},</strong> {currentWeather.country}
           </Chip>
         )}
         <Form className='flex flex-row flex-grow-0' onSubmit={handleSubmit}>
@@ -61,18 +61,20 @@ function App() {
          * <Menu />
          */}
       </header>
+      <div className='text-sm text-center mt-4'>
+        <p>Continuamente estoy trabajando para diseñar la tabla responsive</p>
+        <p>Próximamente estará disponible</p>
+      </div>
       {loading || searching ? (
         <Loader />
-      ) : data ? (
+      ) : currentWeather ? (
         <div className='weather_container'>
           <CurrentWeather
-            weather={data.current}
-            time={data.location.localtime_epoch}
+            weather={currentWeather.current}
+            time={currentWeather.time}
           />
-          <HourlyWeather />
-          <ForecastWeather
-            forecast={data.forecast.forecastday}
-          ></ForecastWeather>
+          <HourlyWeather data={hourlyWeather} />
+          <DailyWeather data={dailyWeather}></DailyWeather>
         </div>
       ) : (
         ''

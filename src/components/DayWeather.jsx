@@ -13,9 +13,11 @@ function DayWeather({ data, day = 'Hoy' }) {
   };
 
   return (
-    <article className='day_weather h-full min-w-56 bg-neutral-900 p-4 rounded-xl text-center pb-4'>
+    <article className='day_weather h-full min-w-60 bg-neutral-900 p-4 rounded-xl text-center pb-4'>
       <header className='day_weather_header flex flex-row flex-wrap items-center justify-between gap-4'>
-        <Chip>{day}</Chip>
+        <Chip>
+          <strong>{day}</strong>
+        </Chip>
         <Chip>{weather.condition}</Chip>
       </header>
       <main className='day_weather_main'>

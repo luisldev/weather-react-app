@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 
 export function useWeather(url) {
-  const [data, setData] = useState(null);
+  const [currentWeather, setCurrentWeather] = useState(null);
+  const [dailyWeather, setDailyWeather] = useState(null);
+  const [hourlyWeather, setHourlyWeather] = useState(null);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (!url) return;
     setLoading(true);
@@ -13,10 +16,23 @@ export function useWeather(url) {
         }
         return res.json();
       })
-      .then((response) => setData(response))
+      .then((response) => {
+        setCurrentWeather({
+          location: response.location.name,
+          country: response.location.country,
+          current: response.current,
+          time: response.location.localtime_epoch,
+          current: response.current,
+        });
+        setDailyWeather(response.forecast.forecastday);
+        setHourlyWeather({
+          today: response.forecast.forecastday[0].hour,
+          tomorrow: response.forecast.forecastday[1].hour,
+        });
+      })
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }, [url]);
 
-  return { data, loading };
+  return { currentWeather, dailyWeather, hourlyWeather, loading };
 }
