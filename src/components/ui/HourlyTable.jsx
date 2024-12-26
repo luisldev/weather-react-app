@@ -18,10 +18,8 @@ function HourlyTable({ data }) {
     >
       <TableHeader>
         <TableColumn key='date'>HORA</TableColumn>
-        <TableColumn key='temp'>TEMP.</TableColumn>
-        <TableColumn className='hidden' key='condition'>
-          CONDICIÓN
-        </TableColumn>
+        <TableColumn key='temp'>TEMP. °C</TableColumn>
+        <TableColumn key='condition'>CONDICIÓN</TableColumn>
         <TableColumn key='cloud'>NUBOSIDAD (%)</TableColumn>
         <TableColumn key='wind'>VIENTO (km/h)</TableColumn>
         <TableColumn key='humidity'>HUMEDAD (%)</TableColumn>

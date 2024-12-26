@@ -61,7 +61,7 @@ function App() {
          * <Menu />
          */}
       </header>
-      <div className='text-sm text-center mt-4'>
+      <div className='text-sm text-center mt-4 opacity-50'>
         <p>Continuamente estoy trabajando para diseñar la tabla responsive</p>
         <p>Próximamente estará disponible</p>
       </div>
