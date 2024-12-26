@@ -10,19 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@nextui-org/button": "2.2.2",
-    "@nextui-org/chip": "2.2.2",
-    "@nextui-org/form": "2.1.1",
-    "@nextui-org/input": "2.4.1",
-    "@nextui-org/react": "2.6.2",
-    "@nextui-org/skeleton": "2.2.2",
-    "@nextui-org/system": "2.4.1",
-    "@nextui-org/theme": "2.4.1",
-    "framer-motion": "11.13.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
-=======
     "@fontsource-variable/onest": "^5.1.0",
     "@nextui-org/button": "^2.2.2",
     "@nextui-org/chip": "^2.2.2",
@@ -36,7 +23,6 @@
     "framer-motion": "^11.13.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
->>>>>>> preview
   },
   "devDependencies": {
     "@eslint/js": "9.15.0",
